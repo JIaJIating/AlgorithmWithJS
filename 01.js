@@ -74,8 +74,93 @@ for循环遍历数组：arr[i]=arr[i+1]
 arr.shift(): 删除数组第一个元素
 // 
 // 3.从数组中间位置添加或删除元素
+var nums=[1,2,3,7,8,9];
+var newElement=[4,5,6];
+nums.splice(3,0,newElement); // 0表示添加 
+print(nums);
+// 插入数组的元素不必组织成一个数组，可以是任意元素序列
+nums.splice(3,0,4,5,6);
+var nums=[1,2,3,4,5];
+nums.splice(3,2);  //从下标为3的开始截取2个
+print(nums);
 
-
-
-//
 //4.为数组排序
+// reverse():翻转
+var nums=[1,3,4,5,7];
+var num=nums.reverse();
+print(num);
+// sort():按照字典顺序对元素排序的， 
+// 元素是字符串类型
+var names=["David","Mike","Cyth","Call","Bike"];
+var sort=names.sort();
+alert(sort);
+// 元素是数字类型
+var nums=[3,2,1,100,200];
+nums.sort();
+print(nums);     // 1,100,2,200,3  明显有错误
+
+// 所以，一般排序
+function compare(num1,num2){
+	return num1-num2;
+}
+var nums=[3,1,2,100,300,4];
+nums.sort(compare);
+alert(nums);
+
+//---------------------------迭代器方法---------------------------------//
+// 1.不生成新数组的迭代器方法
+// forEach()：接受一个函数作为参数，对数组中的每个元素使用该函数
+function square(num){
+	print(num,num*num);
+}
+var nums=[1,2,3,4,5];
+nums.forEach(square);
+// every():接受一个返回值为布尔类型的函数，如果对于所有的元素，
+// 该函数均返回true,则该方法返回true;
+function isEven(num){
+	return num % 2 ==0;
+}
+var nums=[2,4,6,8,10];
+var even=nums.every(isEven);
+if(even){
+	print("all numbers are even");
+}else{
+	print("not all numbers are even");
+}
+// every():接受一个返回值为布尔类型的函数，只要有一个元素使得该函数均返回true
+//则该方法返回true;
+function isEven(num){
+	return num % 2 ==0;
+}
+// var nums=[2,7,6,8,10];
+var nums=[1,7,3,5];  
+var even=nums.some(isEven);
+if(even){
+	alert("all numbers are even");
+}else{
+	alert("not all numbers are even");
+}
+// reduce():接受一个函数，返回一个值。该方法会从一个累加值开始，
+// 不断对累加值和数组中的后序元素调用该函数，直到数组中的最后一个元素
+// 最后返回累加值
+function add(lei,hou){
+	return lei + hou;
+}
+var nums=[1,2,3,4,5,6,7];
+var sum=nums.reduce(add);
+print(sum);        //28
+// reduce()方法也可以用来将数组中的元素连接成长字符串
+function concat(strlei,str){
+return strlei + str;
+}
+var words=["i ","love ","you "];
+var sentence=words.reduce(concat);
+print(sentence);
+// reduceRight()方法:是从右到左执行，可以将数组中的元素进行翻转
+function concat(strlei,str){
+return strlei + str;
+}
+var words=["i ","love ","you "];
+var sentence=words.reduceRight(concat);
+alert(sentence);
+// 2. 生成新数组的迭代器方法
